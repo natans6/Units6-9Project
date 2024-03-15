@@ -31,7 +31,18 @@ public class ChoosePhrase {
 
         if (level.equals(easyLevel))    {
             for (int i = 0; i < easyLevel.size(); i++)  {
-
+                WheelOfFortune phrase = new WheelOfFortune(easyLevel.get(i));
+                phrase.runWheelOfFortune();
+            }
+        } else if (level.equals(mediumLevel)){
+            for (int i = 0; i < easyLevel.size(); i++)  {
+                WheelOfFortune phrase = new WheelOfFortune(easyLevel.get(i));
+                phrase.runWheelOfFortune();
+            }
+        } else if (level.equals(hardLevel)){
+            for (int i = 0; i < easyLevel.size(); i++)  {
+                WheelOfFortune phrase = new WheelOfFortune(easyLevel.get(i));
+                phrase.runWheelOfFortune();
             }
         }
 
