@@ -1,3 +1,3 @@
-public class Player extends WheelOfFortune{
+public class Player{
 
 }

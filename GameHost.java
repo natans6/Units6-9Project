@@ -1,3 +1,3 @@
-public class GameHost extends WheelOfFortune{
+public class GameHost extends Player{
 
 }

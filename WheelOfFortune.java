@@ -5,6 +5,7 @@ public class WheelOfFortune {
 
     }
 
+    // adds a phrase to 2D array
     public void addPhrase() {
 
     }
