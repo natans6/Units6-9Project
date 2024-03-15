@@ -29,5 +29,11 @@ public class ChoosePhrase {
         hardLevel.add("Percy Jackson");
         hardLevel.add("To a kill a mocking bird");
 
+        if (level.equals(easyLevel))    {
+            for (int i = 0; i < easyLevel.size(); i++)  {
+
+            }
+        }
+
     }
 }
