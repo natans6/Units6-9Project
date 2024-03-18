@@ -1,3 +1,3 @@
-public class GameHost extends Player{
+public class GameHost {
 
 }
