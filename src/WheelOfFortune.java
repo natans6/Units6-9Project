@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class WheelOfFortune {
     private String[][] WheelOfFortunePhrase;
-
+    private String[] words;
     private int lives;
     public WheelOfFortune(String phrase){
         lives = 3;
-        String[] words = phrase.split(" ");
+        words = phrase.split(" ");
         int count = 0;
         String largestWord = "";
         for (int j = 0; j < words.length; j++)  {
