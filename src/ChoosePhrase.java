@@ -21,7 +21,7 @@ public class ChoosePhrase {
         ArrayList<String> mediumLevel = new ArrayList<>();
         mediumLevel.add("Binary Search");
         mediumLevel.add("Iteration");
-        mediumLevel.add("Algorithm");
+        mediumLevel.add("Data Abstraction");
         mediumLevel.add("Jargon");
         ArrayList<String> hardLevel = new ArrayList<>();
         hardLevel.add("Harry Potter");
@@ -29,18 +29,20 @@ public class ChoosePhrase {
         hardLevel.add("Percy Jackson");
         hardLevel.add("To a kill a mocking bird");
 
-        if (level.equals(easyLevel))    {
+        if (level.equals("easy"))    {
             for (int i = 0; i < easyLevel.size(); i++)  {
                 WheelOfFortune phrase = new WheelOfFortune(easyLevel.get(i));
                 phrase.runWheelOfFortune();
+                setLevel("medium");
             }
-        } else if (level.equals(mediumLevel)){
-            for (int i = 0; i < easyLevel.size(); i++)  {
+        } else if (level.equals("medium")){
+            for (int i = 0; i < mediumLevel.size(); i++)  {
                 WheelOfFortune phrase = new WheelOfFortune(easyLevel.get(i));
                 phrase.runWheelOfFortune();
+                setLevel("hard");
             }
-        } else if (level.equals(hardLevel)){
-            for (int i = 0; i < easyLevel.size(); i++)  {
+        } else if (level.equals("hard")){
+            for (int i = 0; i < hardLevel.size(); i++)  {
                 WheelOfFortune phrase = new WheelOfFortune(easyLevel.get(i));
                 phrase.runWheelOfFortune();
             }
