@@ -4,4 +4,7 @@ public class GameHost extends Player{
         super(name);
         this.message = message;
     }
+    public void role(){
+
+    }
 }
