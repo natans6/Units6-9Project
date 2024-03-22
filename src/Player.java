@@ -1,18 +1,25 @@
-public class Player{
-    private int score;
+public class Player {
+    private  int lives;
     private String name;
-    public Player(String name){
-        this.name = name;
+
+    public Player(String name, int  lives){
+        this.name =  name;
+        this.lives =  lives;
     }
 
-    public int getScore(){
-        return score;
-    }
     public String getName(){
         return name;
     }
-
-    public void greet(){
-        System.out.println("Thank you so much for having me! ");
+    public int getLives(){
+        return  lives;
+    }
+    public void decreaseLives(){
+        lives--;
+    }
+    public void  increaseLives(){
+        lives++;
+    }
+    public String showLives(){
+        return name + " has " + lives + " lives!";
     }
 }
