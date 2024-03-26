@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
 
 public class WheelOfFortune {
     private String phrase;
@@ -13,14 +15,17 @@ public class WheelOfFortune {
         categories = new String[]{"BAHAMAS", "JAPAN", "CHINA", "COSTA RICA", "BINARY SEARCH", "ITERATION", "ALGORITHM", "JARGON", "HARRY POTTER", "SONG OF SOLOMON", "PERCY JACKSON", "TO KILL A MOCKING BIRD"};
     }
 
+
     public void play(){
         introduction();
         runGame();
     }
 
+
     public void introduction(){
         System.out.println("Welcome to the Wheel of Fortune Java project, where luck and strategy collide in a whirlwind of excitement! \nPrepare to spin the wheel, solve puzzles, and test your fortune in this thrilling interactive game experience.");
     }
+
 
     public void runGame(){
         System.out.println("Game Host: What is your name? ");
@@ -29,47 +34,75 @@ public class WheelOfFortune {
         System.out.print("Game Host: Well " + player1.getName() + ", I wish you good luck in finding your true worth and fortune!");
         System.out.println(" You will have a total of " + Colors.getAnsiPurple() + player1.getLives() + Colors.getAnsiReset() + " lives to reach the fortune...");
         for (round = 1; round < 13; round++){
-                System.out.println("╰── ⋅ ⋅ ── ✩ ── ⋅ ⋅ ──╯");
-                boolean ready = false;
-                System.out.println(Colors.getAnsiPurple() + "Round " + round + " is now commencing..." + Colors.getAnsiReset());
-                setPhraseFound();
-                fillActualPhrase();
-                showPhrase();
-                while (!ready && player1.getLives() > 0) {
-                    System.out.println("Would you like to guess the whole phrase? (y for yes / l for guessing a letter): ");
-                    String answer = scanner.nextLine();
-                    if (answer.equals("y")) {
-                        System.out.println("What do you think the phrase is: ");
-                        String guessedAnswer = scanner.nextLine();
-                        if (checkIfCompletePhraseGuessedCorrectly(guessedAnswer.toUpperCase())) {
-                            ready = true;
-                        } else {
-                            System.out.println("Sorry the phrase you guessed was incorrect...");
-                            player1.decreaseLives();
+            System.out.println("╰── ⋅ ⋅ ── ✩ ── ⋅ ⋅ ──╯");
+            boolean ready = false;
+            System.out.println(Colors.getAnsiPurple() + "Round " + round + " is now commencing..." + Colors.getAnsiReset());
+            setPhraseFound();
+            fillActualPhrase();
+            showPhrase();
+            while (!ready && player1.getLives() > 0) {
+                System.out.println("Points: "+ player1.getPoints());
+                System.out.println("Would you like to guess the whole phrase? (y for yes / l for guessing a letter): ");
+                String answer = scanner.nextLine();
+                if (answer.equals("y")) {
+                    System.out.println("What do you think the phrase is: ");
+                    String guessedAnswer = scanner.nextLine();
+                    if (checkIfCompletePhraseGuessedCorrectly(guessedAnswer.toUpperCase())) {
+                        for(int i =0;i< categories.length;i++){
+                            if(categories[i].equals(phrase)){
+                                if(i<4){
+                                    player1.addPoints(1000);
+                                } else if (i<8) {
+                                    player1.addPoints(2500);
+                                }else{
+                                    player1.addPoints(5000);
+                                }
+
+
+                            }
                         }
-                    } else if (answer.equals("l")) {
-                        System.out.print("What letter would you like to guess: ");
-                        String letter = scanner.nextLine();
-                        if (checkIfLetterMatches(letter.toUpperCase())) {
-                            System.out.println("You guessed a correct letter!");
-                        } else {
-                            System.out.println("That letter is not in the phrase...");
-                            player1.decreaseLives();
-                        }
-                    }
-                    System.out.println("You have " + player1.getLives() + " live(s) left!");
-                    showPhrase();
-                    if (checkIfPhraseCompleted()) {
+
+
                         ready = true;
-                        System.out.println(Colors.getAnsiGreen() + "CONGRATULATIONS FOR PASSING ROUND " + round + "!" + Colors.getAnsiReset());
+                    } else {
+                        System.out.println("Sorry the phrase you guessed was incorrect...");
+                        player1.decreaseLives();
+                    }
+                } else if (answer.equals("l")) {
+                    System.out.print("What letter would you like to guess: ");
+                    String letter = scanner.nextLine();
+                    if (checkIfLetterMatches(letter.toUpperCase())) {
+                        System.out.println("You guessed a correct letter!");
+                        int amtTimes= arrayOfIndexes(letter);
+                        System.out.println("Arrayofindexes value: " + amtTimes);
+                        if(amtTimes==1){
+                            System.out.println("That letter was once. 100 points added to your score.");
+                            player1.addPoints(100);
+                        }
+                        else{
+                            System.out.println("That letter was found "+amtTimes+" times. "+amtTimes*100+" points added to your score.");
+                            player1.addPoints(amtTimes*100);
+                        }
+
+                    } else {
+                        System.out.println("That letter is not in the phrase...");
+                        player1.decreaseLives();
                     }
                 }
+                System.out.println("You have " + player1.getLives() + " live(s) left!");
+                showPhrase();
+                if (checkIfPhraseCompleted()) {
+                    ready = true;
+                    System.out.println(Colors.getAnsiGreen() + "CONGRATULATIONS FOR PASSING ROUND " + round + "!" + Colors.getAnsiReset());
+                }
+            }
             if (player1.getLives() <= 0)    {
                 System.out.println("Sorry, you lost the game.");
                 break;
             }
         }
     }
+
 
     public void getPhrase(){
         phrase = categories[round - 1];
@@ -137,16 +170,27 @@ public class WheelOfFortune {
     }
     public boolean checkIfLetterMatches(String letter){
         boolean check  = false;
+        if(arrayOfIndexes(letter)!=0){
+            check=true;
+        }
+        return check;
+    }
+    public int arrayOfIndexes(String letter){
+        int[][] arrayIndexes = new int[actualPhrase.length][actualPhrase[0].length];
+        int total = 0;
         for (int i = 0; i < actualPhrase.length;  i++){
             for (int j = 0; j < actualPhrase[i].length;  j++){
                 if (actualPhrase[i][j].equals(letter)){
                     phraseFound[i][j] = letter.toUpperCase();
-                    check = true;
+                    arrayIndexes[i][j] = 1;
+                    total++;
                 }
             }
         }
-        return check;
+        return total;
     }
+
+
     public boolean checkIfCompletePhraseGuessedCorrectly(String phraseGuessed){
         if  (phraseGuessed.equals(phrase)){
             phraseFound = actualPhrase;
