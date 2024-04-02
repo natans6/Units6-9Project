@@ -77,21 +77,19 @@ public class WheelOfFortune {
                         int amtTimes = arrayOfIndexes(letter);
                         if(amtTimes==1){
                             player1.addPoints(100);
-                            showPhrase();
                             System.out.println("That letter was found once. 100 points added to your score.");
                         }
                         else{
                             player1.addPoints(amtTimes*100);
-                            showPhrase();
                             System.out.println("That letter was found "+amtTimes+" times. "+amtTimes*100+" points added to your score.");
                         }
 
                     } else {
                         player1.decreaseLives();
-                        showPhrase();
                         System.out.println("That letter is not in the phrase...");
                     }
                 }
+                showPhrase();
                 System.out.println("You have " + player1.getLives() + " live(s) left!");
 
                 if (checkIfPhraseCompleted()) {
