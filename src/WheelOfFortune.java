@@ -98,7 +98,10 @@ public class WheelOfFortune {
                 }
             }
             if (player1.getLives() <= 0)    {
-                System.out.println("Sorry, you lost the game.");
+                System.out.println("<---------------------------------------------------------->");
+                System.out.println("Sorry, you " + Colors.getAnsiRed()+ "lost" + Colors.getAnsiReset() + " the game.");
+                System.out.println("You ended the game with " + Colors.getAnsiGreen() + player1.getPoints() + Colors.getAnsiReset() + " points!");
+                System.out.println("The word that you were not able to guess correctly was: " + Colors.getAnsiUnderline() + phrase + Colors.getAnsiReset());
                 break;
             }
         }
