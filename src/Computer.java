@@ -1,0 +1,7 @@
+public class Computer extends Player{
+    private String name;
+    private int lives;
+    public Computer(String name, int  lives)    {
+        super(name, lives);
+    }
+}
