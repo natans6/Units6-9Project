@@ -93,6 +93,12 @@ public class WheelOfFortune {
                 if (checkIfPhraseCompleted()) {
                     ready = true;
                     System.out.println(Colors.getAnsiGreen() + "CONGRATULATIONS FOR PASSING ROUND " + round + "!" + Colors.getAnsiReset());
+                    if (round == 12){
+                        System.out.println("<---------------------------------------------------------->");
+                        System.out.println("YOU HAVE COMPLETED THE GAME AND HAVE WON A GRAND TOTAL OF " + player1.getPoints() + " POINTS!");
+                        System.out.println("Now it is time for us to leave, have a good one!");
+                        break;
+                    }
                 }
 
             }
