@@ -73,24 +73,26 @@ public class WheelOfFortune {
                     String letter = scanner.nextLine();
                     if (checkIfLetterMatches(letter.toUpperCase())) {
                         System.out.println("You guessed a correct letter!");
-                        int amtTimes= arrayOfIndexes(letter);
-                        System.out.println("Arrayofindexes value: " + amtTimes);
+                        int amtTimes = arrayOfIndexes(letter);
                         if(amtTimes==1){
-                            System.out.println("That letter was once. 100 points added to your score.");
                             player1.addPoints(100);
+                            showPhrase();
+                            System.out.println("That letter was found once. 100 points added to your score.");
                         }
                         else{
-                            System.out.println("That letter was found "+amtTimes+" times. "+amtTimes*100+" points added to your score.");
                             player1.addPoints(amtTimes*100);
+                            showPhrase();
+                            System.out.println("That letter was found "+amtTimes+" times. "+amtTimes*100+" points added to your score.");
                         }
 
                     } else {
-                        System.out.println("That letter is not in the phrase...");
                         player1.decreaseLives();
+                        showPhrase();
+                        System.out.println("That letter is not in the phrase...");
                     }
                 }
                 System.out.println("You have " + player1.getLives() + " live(s) left!");
-                showPhrase();
+
                 if (checkIfPhraseCompleted()) {
                     ready = true;
                     System.out.println(Colors.getAnsiGreen() + "CONGRATULATIONS FOR PASSING ROUND " + round + "!" + Colors.getAnsiReset());
@@ -176,13 +178,11 @@ public class WheelOfFortune {
         return check;
     }
     public int arrayOfIndexes(String letter){
-        int[][] arrayIndexes = new int[actualPhrase.length][actualPhrase[0].length];
         int total = 0;
         for (int i = 0; i < actualPhrase.length;  i++){
             for (int j = 0; j < actualPhrase[i].length;  j++){
-                if (actualPhrase[i][j].equals(letter)){
+                if (actualPhrase[i][j].equals(letter.toUpperCase())){
                     phraseFound[i][j] = letter.toUpperCase();
-                    arrayIndexes[i][j] = 1;
                     total++;
                 }
             }

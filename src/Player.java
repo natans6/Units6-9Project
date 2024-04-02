@@ -25,7 +25,7 @@ public class Player {
         return name + " has " + lives + " lives!";
     }
     public void addPoints(int amt){
-        points+=amt;
+        points += amt;
     }
     public int getPoints(){
         return points;
