@@ -58,8 +58,6 @@ public class WheelOfFortune {
                                 }else{
                                     player1.addPoints(5000);
                                 }
-
-
                             }
                         }
 
@@ -96,6 +94,7 @@ public class WheelOfFortune {
                     ready = true;
                     System.out.println(Colors.getAnsiGreen() + "CONGRATULATIONS FOR PASSING ROUND " + round + "!" + Colors.getAnsiReset());
                 }
+
             }
             if (player1.getLives() <= 0)    {
                 System.out.println("<---------------------------------------------------------->");
