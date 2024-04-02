@@ -31,6 +31,7 @@ public class WheelOfFortune {
         System.out.println("Game Host: What is your name? ");
         String name = scanner.nextLine();
         Player player1 = new Player(name, 3);
+        Computer computer = new Computer("COMPUTER", 1000);
         System.out.print("Game Host: Well " + player1.getName() + ", I wish you good luck in finding your true worth and fortune!");
         System.out.println(" You will have a total of " + Colors.getAnsiPurple() + player1.getLives() + Colors.getAnsiReset() + " lives to reach the fortune...");
         for (round = 1; round < 13; round++){
