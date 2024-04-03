@@ -7,6 +7,7 @@ public class Colors{
     private static final String ANSI_PURPLE = "\u001B[35m";
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_WHITE = "\u001B[37m";
+    private static final String ANSI_UNDERLINE = "\u001b[4m";
     public Colors(){
 
     }
@@ -34,5 +35,8 @@ public class Colors{
     }
     public static String getAnsiWhite(){
         return ANSI_WHITE;
+    }
+    public static String getAnsiUnderline(){
+        return ANSI_UNDERLINE;
     }
 }
