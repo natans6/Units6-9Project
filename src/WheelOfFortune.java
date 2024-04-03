@@ -34,9 +34,11 @@ public class WheelOfFortune {
         Player player1 = new Player(name, 3);
         Computer computer = new Computer("COMPUTER", 1000);
         System.out.println("Game Host: Well " + player1.getName() + ", I wish you good luck in finding your true worth and fortune!");
-        System.out.println(" You will have a total of " + Colors.getAnsiPurple() + player1.getLives() + Colors.getAnsiReset() + " lives to reach the fortune...");
+        System.out.println("You will have a total of " + Colors.getAnsiPurple() + player1.getLives() + Colors.getAnsiReset() + " lives to reach the fortune...");
         for (round = 1; round < 13; round++){
+            System.out.println();
             System.out.println("<---------------------------------------------------------->");
+            System.out.println();
             boolean ready = false;
             System.out.println(Colors.getAnsiPurple() + "Round " + round + " is now commencing..." + Colors.getAnsiReset());
             setPhraseFound();
