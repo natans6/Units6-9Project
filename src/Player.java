@@ -18,14 +18,14 @@ public class Player {
     public void decreaseLives(){
         lives--;
     }
-    public void  increaseLives(){
-        lives++;
-    }
     public String showLives(){
-        return name + " has " + lives + " lives!";
+        return name + " has " + lives + " live(s)!";
     }
     public void addPoints(int amt){
         points += amt;
+    }
+    public void subtractPoints(int amt){
+        points -= amt;
     }
     public int getPoints(){
         return points;

@@ -23,19 +23,20 @@ public class WheelOfFortune {
 
 
     public void introduction(){
-        System.out.println("Welcome to the Wheel of Fortune Java project, where luck and strategy collide in a whirlwind of excitement! \nPrepare to spin the wheel, solve puzzles, and test your fortune in this thrilling interactive game experience.");
+        System.out.println("Welcome to the Wheel of Fortune Java project, where luck and strategy collide in a whirlwind of excitement! \nPrepare to spin the wheel, solve puzzles, and test your fortune in this thrilling interactive game experience. \nIn order to guess a vowel, you need to have at least 1000 points.");
+        System.out.println();
     }
 
 
     public void runGame(){
-        System.out.println("Game Host: What is your name? ");
+        System.out.print("Game Host: What is your name? ");
         String name = scanner.nextLine();
         Player player1 = new Player(name, 3);
         Computer computer = new Computer("COMPUTER", 1000);
-        System.out.print("Game Host: Well " + player1.getName() + ", I wish you good luck in finding your true worth and fortune!");
+        System.out.println("Game Host: Well " + player1.getName() + ", I wish you good luck in finding your true worth and fortune!");
         System.out.println(" You will have a total of " + Colors.getAnsiPurple() + player1.getLives() + Colors.getAnsiReset() + " lives to reach the fortune...");
         for (round = 1; round < 13; round++){
-            System.out.println("╰── ⋅ ⋅ ── ✩ ── ⋅ ⋅ ──╯");
+            System.out.println("<---------------------------------------------------------->");
             boolean ready = false;
             System.out.println(Colors.getAnsiPurple() + "Round " + round + " is now commencing..." + Colors.getAnsiReset());
             setPhraseFound();
@@ -70,6 +71,22 @@ public class WheelOfFortune {
                 } else if (answer.equals("l")) {
                     System.out.print("What letter would you like to guess: ");
                     String letter = scanner.nextLine();
+                    if (checkLetterVowel(letter.toUpperCase())){
+                        if (player1.getPoints() >= 1000){
+                            System.out.println(Colors.getAnsiUnderline()  + "You spent 1000 points in order to purchase a vowel." +  Colors.getAnsiReset());
+                            player1.subtractPoints(1000);
+
+                        } else{
+                            System.out.println(Colors.getAnsiUnderline() +  "You do not have 1000 or more points in order to buy a vowel, guess a consonant..."  +  Colors.getAnsiReset());
+                            System.out.print("What letter would you like to guess: ");
+                            letter = scanner.nextLine();
+                            while (checkLetterVowel(letter.toUpperCase())){
+                                System.out.println("That letter is not a vowel, try again!");
+                                System.out.print("What letter would you like to guess: ");
+                                letter = scanner.nextLine();
+                            }
+                        }
+                    }
                     if (checkIfLetterMatches(letter.toUpperCase())) {
                         System.out.println("You guessed a correct letter!");
                         int amtTimes = arrayOfIndexes(letter);
@@ -88,7 +105,7 @@ public class WheelOfFortune {
                     }
                 }
                 showPhrase();
-                System.out.println("You have " + player1.getLives() + " live(s) left!");
+                System.out.println(player1.showLives());
 
                 if (checkIfPhraseCompleted()) {
                     ready = true;
@@ -111,7 +128,6 @@ public class WheelOfFortune {
             }
         }
     }
-
 
     public void getPhrase(){
         phrase = categories[round - 1];
@@ -196,8 +212,6 @@ public class WheelOfFortune {
         }
         return total;
     }
-
-
     public boolean checkIfCompletePhraseGuessedCorrectly(String phraseGuessed){
         if  (phraseGuessed.equals(phrase)){
             phraseFound = actualPhrase;
@@ -215,5 +229,8 @@ public class WheelOfFortune {
             }
         }
         return true;
+    }
+    public  boolean checkLetterVowel(String letter){
+        return letter.equals("A") || letter.equals("E") || letter.equals("I") || letter.equals("O") || letter.equals("U");
     }
 }
