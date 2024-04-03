@@ -7,6 +7,16 @@ public class Computer extends Player{
         points = 0;
     }
 
+    public boolean guessCorrectLetter()   {
+        double random  =  Math.random();
+        if (random <= 0.5)  {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 
 
 

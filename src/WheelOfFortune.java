@@ -28,14 +28,14 @@ public class WheelOfFortune {
     }
 
 
-    public void runGame(){
+    public void runGame() {
         System.out.print("Game Host: What is your name? ");
         String name = scanner.nextLine();
         Player player1 = new Player(name, 3);
         Computer computer = new Computer("COMPUTER", 1000);
         System.out.println("Game Host: Well " + player1.getName() + ", I wish you good luck in finding your true worth and fortune!");
         System.out.println("You will have a total of " + Colors.getAnsiPurple() + player1.getLives() + Colors.getAnsiReset() + " lives to reach the fortune...");
-        for (round = 1; round < 13; round++){
+        for (round = 1; round < 13; round++) {
             System.out.println();
             System.out.println("<---------------------------------------------------------->");
             System.out.println();
@@ -45,20 +45,20 @@ public class WheelOfFortune {
             fillActualPhrase();
             showPhrase();
             while (!ready && player1.getLives() > 0) {
-                System.out.println("Points: "+ player1.getPoints());
+                System.out.println("Points: " + player1.getPoints());
                 System.out.println("Would you like to guess the whole phrase? (y for yes / l for guessing a letter): ");
                 String answer = scanner.nextLine();
                 if (answer.equals("y")) {
                     System.out.println("What do you think the phrase is: ");
                     String guessedAnswer = scanner.nextLine();
                     if (checkIfCompletePhraseGuessedCorrectly(guessedAnswer.toUpperCase())) {
-                        for(int i =0;i< categories.length;i++){
-                            if(categories[i].equals(phrase)){
-                                if(i<4){
+                        for (int i = 0; i < categories.length; i++) {
+                            if (categories[i].equals(phrase)) {
+                                if (i < 4) {
                                     player1.addPoints(1000);
-                                } else if (i<8) {
+                                } else if (i < 8) {
                                     player1.addPoints(2500);
-                                }else{
+                                } else {
                                     player1.addPoints(5000);
                                 }
                             }
@@ -73,16 +73,16 @@ public class WheelOfFortune {
                 } else if (answer.equals("l")) {
                     System.out.print("What letter would you like to guess: ");
                     String letter = scanner.nextLine();
-                    if (checkLetterVowel(letter.toUpperCase())){
-                        if (player1.getPoints() >= 1000){
-                            System.out.println(Colors.getAnsiUnderline()  + "You spent 1000 points in order to purchase a vowel." +  Colors.getAnsiReset());
+                    if (checkLetterVowel(letter.toUpperCase())) {
+                        if (player1.getPoints() >= 1000) {
+                            System.out.println(Colors.getAnsiUnderline() + "You spent 1000 points in order to purchase a vowel." + Colors.getAnsiReset());
                             player1.subtractPoints(1000);
 
-                        } else{
-                            System.out.println(Colors.getAnsiUnderline() +  "You do not have 1000 or more points in order to buy a vowel, guess a consonant..."  +  Colors.getAnsiReset());
+                        } else {
+                            System.out.println(Colors.getAnsiUnderline() + "You do not have 1000 or more points in order to buy a vowel, guess a consonant..." + Colors.getAnsiReset());
                             System.out.print("What letter would you like to guess: ");
                             letter = scanner.nextLine();
-                            while (checkLetterVowel(letter.toUpperCase())){
+                            while (checkLetterVowel(letter.toUpperCase())) {
                                 System.out.println("That letter is not a vowel, try again!");
                                 System.out.print("What letter would you like to guess: ");
                                 letter = scanner.nextLine();
@@ -92,13 +92,12 @@ public class WheelOfFortune {
                     if (checkIfLetterMatches(letter.toUpperCase())) {
                         System.out.println("You guessed a correct letter!");
                         int amtTimes = arrayOfIndexes(letter);
-                        if(amtTimes==1){
+                        if (amtTimes == 1) {
                             player1.addPoints(100);
                             System.out.println("That letter was found once. 100 points added to your score.");
-                        }
-                        else{
-                            player1.addPoints(amtTimes*100);
-                            System.out.println("That letter was found "+amtTimes+" times. "+amtTimes*100+" points added to your score.");
+                        } else {
+                            player1.addPoints(amtTimes * 100);
+                            System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to your score.");
                         }
 
                     } else {
@@ -112,22 +111,41 @@ public class WheelOfFortune {
                 if (checkIfPhraseCompleted()) {
                     ready = true;
                     System.out.println(Colors.getAnsiGreen() + "CONGRATULATIONS FOR PASSING ROUND " + round + "!" + Colors.getAnsiReset());
-                    if (round == 12){
+                    if (round == 12) {
                         System.out.println("<---------------------------------------------------------->");
                         System.out.println("YOU HAVE COMPLETED THE GAME AND HAVE WON A GRAND TOTAL OF " + player1.getPoints() + " POINTS!");
                         System.out.println("Now it is time for us to leave, have a good one!");
                         break;
                     }
                 }
+                if (computer.guessCorrectLetter()) {
 
+                } else {
+                    String[] constants = {"B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"};
+                    int randomConstant = (int) (Math.random() * 20);
+                    if (checkIfLetterMatches(constants[randomConstant].toUpperCase())) {
+                        System.out.println("The Computer guessed a correct letter!");
+                        int amtTimes = arrayOfIndexes(constants[randomConstant].toUpperCase());
+                        if (amtTimes == 1) {
+                            computer.addPoints(100);
+                            System.out.println("That letter was found once. 100 points added to the computer's score score.");
+                        } else {
+                            computer.addPoints(amtTimes * 100);
+                            System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to the computer's score.");
+                        }
+                    } else {
+                        System.out.println("The computer has guessed incorrectly");
+                    }
+                }
             }
-            if (player1.getLives() <= 0)    {
+            if (player1.getLives() <= 0) {
                 System.out.println("<---------------------------------------------------------->");
-                System.out.println("Sorry, you " + Colors.getAnsiRed()+ "lost" + Colors.getAnsiReset() + " the game.");
+                System.out.println("Sorry, you " + Colors.getAnsiRed() + "lost" + Colors.getAnsiReset() + " the game.");
                 System.out.println("You ended the game with " + Colors.getAnsiGreen() + player1.getPoints() + Colors.getAnsiReset() + " points!");
                 System.out.println("The word that you were not able to guess correctly was: " + Colors.getAnsiUnderline() + phrase + Colors.getAnsiReset());
                 break;
             }
+
         }
     }
 
