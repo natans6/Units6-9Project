@@ -1,5 +1,5 @@
 public class Player {
-    private  int lives;
+    private int lives;
     private String name;
     private int points;
 
