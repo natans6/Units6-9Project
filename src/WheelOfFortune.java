@@ -9,10 +9,12 @@ public class WheelOfFortune {
     private String[][] actualPhrase;
     private String[] categories;
     private String[] words;
+    private String[] constants;
     private int round;
     Scanner scanner = new Scanner(System.in);
     public WheelOfFortune(){
         categories = new String[]{"BAHAMAS", "JAPAN", "CHINA", "COSTA RICA", "BINARY SEARCH", "ITERATION", "ALGORITHM", "JARGON", "HARRY POTTER", "SONG OF SOLOMON", "PERCY JACKSON", "TO KILL A MOCKING BIRD"};
+        constants = new String[]{"B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"};
     }
 
 
@@ -90,6 +92,7 @@ public class WheelOfFortune {
                         }
                     }
                     if (checkIfLetterMatches(letter.toUpperCase())) {
+                        removeConstant(letter.toUpperCase());
                         System.out.println("You guessed a correct letter!");
                         int amtTimes = arrayOfIndexes(letter);
                         if (amtTimes == 1) {
@@ -109,6 +112,8 @@ public class WheelOfFortune {
                 System.out.println(player1.showLives());
 
                 if (checkIfPhraseCompleted()) {
+                    String[] temp = {"B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"};
+                    constants = temp;
                     ready = true;
                     System.out.println(Colors.getAnsiGreen() + "CONGRATULATIONS FOR PASSING ROUND " + round + "!" + Colors.getAnsiReset());
                     if (round == 12) {
@@ -121,9 +126,9 @@ public class WheelOfFortune {
                 if (computer.guessCorrectLetter()) {
 
                 } else {
-                    String[] constants = {"B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"};
                     int randomConstant = (int) (Math.random() * 20);
                     if (checkIfLetterMatches(constants[randomConstant].toUpperCase())) {
+                        removeConstant(constants[randomConstant].toUpperCase());
                         System.out.println("The Computer guessed a correct letter!");
                         int amtTimes = arrayOfIndexes(constants[randomConstant].toUpperCase());
                         if (amtTimes == 1) {
@@ -166,6 +171,23 @@ public class WheelOfFortune {
             Arrays.fill(strings, "＿");
         }
         actualPhrase  = new String[words.length][largestWord.length()];
+    }
+
+    public void removeConstant(String letter)    {
+        ArrayList<String> newConstants = new ArrayList<>();
+        for (int i = 0; i < constants.length; i++)  {
+            newConstants.add(constants[i]);
+        }
+        for (int i = 0; i < newConstants.size(); i++)   {
+            if (newConstants.get(i).equals(letter)) {
+                newConstants.remove(i);
+            }
+        }
+        String[] temp = new String[newConstants.size() - 1 ];
+        for (int i = 0; i < temp.length; i++)   {
+            temp[i] += newConstants.get(i);
+        }
+        constants = temp;
     }
     public void fillActualPhrase(){
         String[] words = phrase.split(" ");
