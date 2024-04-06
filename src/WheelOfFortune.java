@@ -33,7 +33,7 @@ public class WheelOfFortune {
     public void runGame() {
         System.out.print("Game Host: What is your name? ");
         String name = scanner.nextLine();
-        Player player1 = new Player(name, 3);
+        Player player1 = new Player(name, 5);
         Computer computer = new Computer("COMPUTER", 1000);
         System.out.println("Game Host: Well " + player1.getName() + ", I wish you good luck in finding your true worth and fortune!");
         System.out.println("You will have a total of " + Colors.getAnsiPurple() + player1.getLives() + Colors.getAnsiReset() + " lives to reach the fortune...");
@@ -47,7 +47,8 @@ public class WheelOfFortune {
             fillActualPhrase();
             showPhrase();
             while (!ready && player1.getLives() > 0) {
-                System.out.println("Points: " + player1.getPoints());
+                System.out.println("Player Points: " + player1.showPoints());
+                System.out.println("Computer Points: " + computer.showPoints());
                 System.out.println("Would you like to guess the whole phrase? (y for yes / l for guessing a letter): ");
                 String answer = scanner.nextLine();
                 if (answer.equals("y")) {
@@ -108,7 +109,6 @@ public class WheelOfFortune {
                         System.out.println("That letter is not in the phrase...");
                     }
                 }
-                showPhrase();
                 System.out.println(player1.showLives());
 
                 if (checkIfPhraseCompleted()) {
@@ -124,12 +124,31 @@ public class WheelOfFortune {
                     }
                 }
                 if (computer.guessCorrectLetter()) {
+                    boolean notValid = true;
+                    int randomIdx = 0;
+                    while (notValid) {
+                        randomIdx = (int) (Math.random() * phrase.length());
+                        for (int i = 0; i < constants.length; i++) {
+                            if ((constants[i]).contains(phrase.substring(randomIdx, randomIdx + 1))) {
+                                removeConstant(constants[i]);
+                                notValid = false;
+                            }
+                        }
+                    }
+                    System.out.println("The Computer guessed " + phrase.substring(randomIdx, randomIdx + 1));
+                    int amtTimes = arrayOfIndexes(phrase.substring(randomIdx, randomIdx + 1));
+                    if (amtTimes == 1) {
+                        computer.addPoints(100);
+                        System.out.println("That letter was found once. 100 points added to the computer's score score.");
+                    } else {
+                        computer.addPoints(amtTimes * 100);
+                        System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to the computer's score.");
+                    }
 
                 } else {
-                    int randomConstant = (int) (Math.random() * 20);
+                    int randomConstant = (int) (Math.random() * constants.length);
                     if (checkIfLetterMatches(constants[randomConstant].toUpperCase())) {
-                        removeConstant(constants[randomConstant].toUpperCase());
-                        System.out.println("The Computer guessed a correct letter!");
+                        System.out.println("The Computer guessed " + constants[randomConstant].toUpperCase());
                         int amtTimes = arrayOfIndexes(constants[randomConstant].toUpperCase());
                         if (amtTimes == 1) {
                             computer.addPoints(100);
@@ -138,10 +157,12 @@ public class WheelOfFortune {
                             computer.addPoints(amtTimes * 100);
                             System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to the computer's score.");
                         }
+                        removeConstant(constants[randomConstant].toUpperCase());
                     } else {
                         System.out.println("The computer has guessed incorrectly");
                     }
                 }
+                showPhrase();
             }
             if (player1.getLives() <= 0) {
                 System.out.println("<---------------------------------------------------------->");
@@ -150,7 +171,6 @@ public class WheelOfFortune {
                 System.out.println("The word that you were not able to guess correctly was: " + Colors.getAnsiUnderline() + phrase + Colors.getAnsiReset());
                 break;
             }
-
         }
     }
 
@@ -179,7 +199,7 @@ public class WheelOfFortune {
             newConstants.add(constants[i]);
         }
         for (int i = 0; i < newConstants.size(); i++)   {
-            if (newConstants.get(i).equals(letter)) {
+            if ((newConstants.get(i)).contains(letter.toUpperCase())) {
                 newConstants.remove(i);
             }
         }

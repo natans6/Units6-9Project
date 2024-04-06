@@ -30,4 +30,7 @@ public class Player {
     public int getPoints(){
         return points;
     }
+    public String showPoints()  {
+        return Colors.getAnsiBlue() + points + Colors.getAnsiReset();
+    }
 }

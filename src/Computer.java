@@ -14,9 +14,11 @@ public class Computer extends Player{
         } else {
             return false;
         }
-
     }
 
+    public String showPoints(){
+        return Colors.getAnsiRed() + getPoints() + Colors.getAnsiReset();
+    }
 
 
 
