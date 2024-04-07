@@ -139,7 +139,7 @@ public class WheelOfFortune {
                     int amtTimes = arrayOfIndexes(phrase.substring(randomIdx, randomIdx + 1));
                     if (amtTimes == 1) {
                         computer.addPoints(100);
-                        System.out.println("That letter was found once. 100 points added to the computer's score score.");
+                        System.out.println("That letter was found once. 100 points added to the computer's score.");
                     } else {
                         computer.addPoints(amtTimes * 100);
                         System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to the computer's score.");
@@ -152,7 +152,7 @@ public class WheelOfFortune {
                         int amtTimes = arrayOfIndexes(constants[randomConstant].toUpperCase());
                         if (amtTimes == 1) {
                             computer.addPoints(100);
-                            System.out.println("That letter was found once. 100 points added to the computer's score score.");
+                            System.out.println("That letter was found once. 100 points added to the computer's score.");
                         } else {
                             computer.addPoints(amtTimes * 100);
                             System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to the computer's score.");

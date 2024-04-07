@@ -15,7 +15,7 @@ public class Computer extends Player{
             return false;
         }
     }
-
+    @Override
     public String showPoints(){
         return Colors.getAnsiRed() + getPoints() + Colors.getAnsiReset();
     }
