@@ -96,19 +96,19 @@ public class WheelOfFortune {
                     }
                     if (checkIfLetterMatches(letter.toUpperCase())) {
                         removeConstant(letter.toUpperCase());
-                        System.out.println("You guessed a correct letter!");
+                        System.out.println(Colors.getAnsiUnderline() + "\nYou guessed a correct letter!\n" + Colors.getAnsiReset());
                         int amtTimes = arrayOfIndexes(letter);
                         if (amtTimes == 1) {
                             player1.addPoints(100);
-                            System.out.println("That letter was found once.\n100 points added to your score.");
+                            System.out.println(Colors.getAnsiBlue() + "That letter was found once.\n100 points added to your score." + Colors.getAnsiReset());
                         } else {
                             player1.addPoints(amtTimes * 100);
-                            System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to your score.");
+                            System.out.println(Colors.getAnsiBlue() + "That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to your score." + Colors.getAnsiReset());
                         }
 
                     } else {
                         player1.decreaseLives();
-                        System.out.println("That letter is not in the phrase...");
+                        System.out.println(Colors.getAnsiBlue() + "That letter is not in the phrase..." + Colors.getAnsiReset());
                     }
                 }
                 System.out.println();
@@ -142,27 +142,27 @@ public class WheelOfFortune {
                     int amtTimes = arrayOfIndexes(phrase.substring(randomIdx, randomIdx + 1));
                     if (amtTimes == 1) {
                         computer.addPoints(100);
-                        System.out.println("That letter was found once. 100 points added to the computer's score.");
+                        System.out.println(Colors.getAnsiRed() + "That letter was found once. 100 points added to the computer's score." + Colors.getAnsiReset());
                     } else {
                         computer.addPoints(amtTimes * 100);
-                        System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to the computer's score.");
+                        System.out.println(Colors.getAnsiRed() + "That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to the computer's score."  + Colors.getAnsiReset());
                     }
 
                 } else {
                     int randomConstant = (int) (Math.random() * constants.length);
                     if (checkIfLetterMatches(constants[randomConstant].toUpperCase())) {
-                        System.out.println("The Computer guessed " + constants[randomConstant].toUpperCase());
+                        System.out.println(Colors.getAnsiRed() + "The Computer guessed " + constants[randomConstant].toUpperCase());
                         int amtTimes = arrayOfIndexes(constants[randomConstant].toUpperCase());
                         if (amtTimes == 1) {
                             computer.addPoints(100);
-                            System.out.println("That letter was found once. 100 points added to the computer's score.");
+                            System.out.println(Colors.getAnsiRed() + "That letter was found once. 100 points added to the computer's score." + Colors.getAnsiReset());
                         } else {
                             computer.addPoints(amtTimes * 100);
-                            System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to the computer's score.");
+                            System.out.println(Colors.getAnsiRed() + "That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to the computer's score." + Colors.getAnsiReset());
                         }
                         removeConstant(constants[randomConstant].toUpperCase());
                     } else {
-                        System.out.println("The computer has guessed incorrectly");
+                        System.out.println(Colors.getAnsiRed() + "The computer has guessed incorrectly" + Colors.getAnsiReset());
                     }
                 }
                 System.out.println();
