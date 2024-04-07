@@ -49,9 +49,11 @@ public class WheelOfFortune {
             while (!ready && player1.getLives() > 0) {
                 System.out.println("Player Points: " + player1.showPoints());
                 System.out.println("Computer Points: " + computer.showPoints());
-                System.out.println("Would you like to guess the whole phrase? (y for yes / l for guessing a letter): ");
+                System.out.println();
+                System.out.print("Would you like to guess the whole phrase? (y for yes / l for guessing a letter): ");
                 String answer = scanner.nextLine();
                 if (answer.equals("y")) {
+                    System.out.println();
                     System.out.println("What do you think the phrase is: ");
                     String guessedAnswer = scanner.nextLine();
                     if (checkIfCompletePhraseGuessedCorrectly(guessedAnswer.toUpperCase())) {
@@ -98,7 +100,7 @@ public class WheelOfFortune {
                         int amtTimes = arrayOfIndexes(letter);
                         if (amtTimes == 1) {
                             player1.addPoints(100);
-                            System.out.println("That letter was found once. 100 points added to your score.");
+                            System.out.println("That letter was found once.\n100 points added to your score.");
                         } else {
                             player1.addPoints(amtTimes * 100);
                             System.out.println("That letter was found " + amtTimes + " times. " + amtTimes * 100 + " points added to your score.");
@@ -109,6 +111,7 @@ public class WheelOfFortune {
                         System.out.println("That letter is not in the phrase...");
                     }
                 }
+                System.out.println();
                 System.out.println(player1.showLives());
 
                 if (checkIfPhraseCompleted()) {
@@ -162,6 +165,7 @@ public class WheelOfFortune {
                         System.out.println("The computer has guessed incorrectly");
                     }
                 }
+                System.out.println();
                 showPhrase();
             }
             if (player1.getLives() <= 0) {
@@ -171,6 +175,7 @@ public class WheelOfFortune {
                 System.out.println("The word that you were not able to guess correctly was: " + Colors.getAnsiUnderline() + phrase + Colors.getAnsiReset());
                 break;
             }
+
         }
     }
 
