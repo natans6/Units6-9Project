@@ -289,18 +289,7 @@ public class WheelOfFortune {
         }
         System.out.println(Colors.getAnsiCyan() + "*****************" +  Colors.getAnsiReset());
     }
-    // Used to compare to what the user guesses
-    public void showAnswerPhrase(){
-        for (int i = 0; i < actualPhrase.length; i++){
-            for (int  j = 0; j < actualPhrase[i].length;  j++){
-                if (actualPhrase[i][j].equals(" ")){
-                    actualPhrase[i][j] = "X";
-                }
-                System.out.print(actualPhrase[i][j]);
-            }
-            System.out.println();
-        }
-    }
+
     public boolean checkIfLetterMatches(String letter){
         boolean check  = false;
         if(arrayOfIndexes(letter)!=0){
