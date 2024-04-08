@@ -25,7 +25,7 @@ public class WheelOfFortune {
 
 
     public void introduction(){
-        System.out.println("Welcome to the Wheel of Fortune Java project, where luck and strategy collide in a whirlwind of excitement! \nPrepare to spin the wheel, solve puzzles, and test your fortune in this thrilling interactive game experience. \nIn order to guess a vowel, you need to have at least 1000 points.");
+        System.out.println("Welcome to the Wheel of Fortune Java project, where luck and strategy collide in a whirlwind of excitement! \nPrepare to spin the wheel, solve puzzles, and test your fortune in this thrilling interactive game experience. \nIn order to guess a vowel, you need to have at least 300 points.");
         System.out.println();
     }
 
@@ -41,6 +41,16 @@ public class WheelOfFortune {
             System.out.println();
             System.out.println("<---------------------------------------------------------->");
             System.out.println();
+            if(round < 5){
+                System.out.println(Colors.getAnsiBlue() + "- - - - - Category : Countries - - - - - " + Colors.getAnsiReset());
+                System.out.println();
+            }  else  if (round < 9){
+                System.out.println(Colors.getAnsiBlue() + "- - - - - Category : Computer Science Terms - - - - - " + Colors.getAnsiReset());
+                System.out.println();
+            }  else {
+                System.out.println(Colors.getAnsiBlue() + "- - - - - Category : Names of Books - - - - - " + Colors.getAnsiReset());
+                System.out.println();
+            }
             boolean ready = false;
             System.out.println(Colors.getAnsiPurple() + "Round " + round + " is now commencing..." + Colors.getAnsiReset());
             setPhraseFound();
@@ -120,6 +130,9 @@ public class WheelOfFortune {
                     ready = true;
                     System.out.println(Colors.getAnsiGreen() + "CONGRATULATIONS FOR PASSING ROUND " + round + "!" + Colors.getAnsiReset());
                     if (round == 12) {
+                        System.out.println();
+                        showPhrase();
+                        System.out.println();
                         System.out.println("<---------------------------------------------------------->");
                         System.out.println("YOU HAVE COMPLETED THE GAME AND HAVE WON A GRAND TOTAL OF " + player1.getPoints() + " POINTS!");
                         System.out.println("Now it is time for us to leave, have a good one!");
@@ -179,6 +192,21 @@ public class WheelOfFortune {
             }
 
         }
+        System.out.println("<---------------------------------------------------------->");
+        ArrayList<Player> currentPlayers = new ArrayList<Player>();
+        currentPlayers.add(player1);
+        currentPlayers.add(computer);
+        for (Player currentPlayer : currentPlayers) {
+            System.out.println(Colors.getAnsiGreen() + currentPlayer.getName() + Colors.getAnsiReset() + " has " + currentPlayer.getPoints() + " points!");
+        }
+        if (player1.getPoints() > computer.getPoints()){
+            System.out.println(player1.getName() + " has more points than the computer!!!");
+        } else if (player1.getPoints() < computer.getPoints()){
+            System.out.println("The computer has more points than you. Sorry not sorry...");
+        } else {
+            System.out.println("Looks like there has been a tie! Too bad...");
+        }
+        System.out.println("<---------------------------------------------------------->");
     }
 
     public void getPhrase(){
