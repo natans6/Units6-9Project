@@ -121,6 +121,19 @@ public class WheelOfFortune {
                         System.out.println(Colors.getAnsiBlue() + "That letter is not in the phrase..." + Colors.getAnsiReset());
                     }
                 }
+                else if(answer.equals("d")){
+                    System.out.println(Colors.getAnsiBlue() + "SECRET DEVELOPER PASSWORD REQUIRED" + Colors.getAnsiReset());
+                    String dev = scanner.nextLine();
+                    if(dev.equals("b55")){
+                        System.out.println(Colors.getAnsiGreen() + "Welcome developer! For program testing purposes, 1000000 points have been added to your player!" + Colors.getAnsiReset());
+                        player1.addPoints(1000000);
+                    }else{
+                        System.out.println(Colors.getAnsiRed() + "Get out of here! You are not a real developer. 1 Life taken away since you are trying to hack the program." + Colors.getAnsiReset());
+                        player1.decreaseLives();
+                    }
+
+                }
+
                 System.out.println();
                 System.out.println(player1.showLives());
 
